@@ -2,6 +2,7 @@ const express = require('express')
 const morgan = require('morgan')
 const path = require('path')
 const app = express()
+const db = require('./db')
 
 //logging middleware
 app.use(morgan('dev'))
@@ -16,6 +17,7 @@ app.use(express.static(path.join(__dirname, '..', 'public')))
 //routes go here
 
 //sync db
+db.sync()
 
 app.listen(8080, () => console.log('Sailing from port 8080!'))
 
