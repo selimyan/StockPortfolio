@@ -30,8 +30,8 @@ app.use(express.urlencoded({ extended: true }))
 //session middleware with passport
 app.use(
   session({
-    secret: process.env.SESSION_SECRET,
-    store: sessionStorage,
+    secret: process.env.SESSION_SECRET || 'The sea is calm',
+    store: sessionStore,
     resave: false,
     saveUninitialized: false
   })
