@@ -9,6 +9,7 @@ export default class Portfolio extends Component {
   }
 
   render() {
+    console.log('user', this.props)
     return (
       <h1>Portfolio</h1>
     )
