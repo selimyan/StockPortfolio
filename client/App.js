@@ -3,6 +3,7 @@ import axios from 'axios'
 import { Route } from 'react-router-dom'
 import Login from './components/Login'
 import Navbar from './components/Navbar'
+import Routes from './Routes'
 
 export default class App extends Component {
   constructor(props) {
@@ -63,7 +64,10 @@ export default class App extends Component {
       <div>
         {
           user.id ?
-            <Navbar logout={this.logout} />
+            <div>
+              <Navbar logout={this.logout} />
+              <Routes user={user} />
+            </div>
             :
             <div>
               <Login
