@@ -1,5 +1,6 @@
 import React, { Component } from "react"
 import axios from 'axios'
+import { Route } from 'react-router-dom'
 import Login from './components/Login'
 
 export default class App extends Component {
@@ -10,13 +11,16 @@ export default class App extends Component {
       error: ''
     }
     this.login = this.login.bind(this)
+    this.register = this.register.bind(this)
   }
 
   async componentDidMount() {
     try {
       const { data } = await axios.get('/auth/me')
-      const user = data ? { ...data, isLoggedIn: true } : {}
-      this.setState({ user, error: '' })
+      this.setState({
+        user: data,
+        error: ''
+      })
     } catch (error) {
       console.log('Error getting the user', error)
     }
@@ -32,15 +36,32 @@ export default class App extends Component {
     }
   }
 
+  async register(user) {
+    try {
+      const { data } = await axios.post('/auth/signup', user)
+      if (data.error) this.setState({ error: data.error })
+      else this.setState({ user: data, error: '' })
+    } catch (error) {
+      console.log('Error registering the user', error)
+    }
+  }
+
   render() {
     const { user, error } = this.state
 
     return (
       <div>
         {
-          user.isLoggedIn
-            ? <h1>We need a navbar and user info here</h1>
-            : <Login login={this.login} error={error} />
+          user.id ?
+            <h1>We need a navbar and user info here</h1>
+            :
+            <div>
+              <Login
+                error={error}
+                login={this.login}
+                register={this.register}
+              />
+            </div>
         }
       </div>
     )
