@@ -2,6 +2,7 @@ import React, { Component } from "react"
 import axios from 'axios'
 import { Route } from 'react-router-dom'
 import Login from './components/Login'
+import Navbar from './components/Navbar'
 
 export default class App extends Component {
   constructor(props) {
@@ -12,6 +13,7 @@ export default class App extends Component {
     }
     this.login = this.login.bind(this)
     this.register = this.register.bind(this)
+    this.logout - this.logout.bind(this)
   }
 
   async componentDidMount() {
@@ -46,6 +48,14 @@ export default class App extends Component {
     }
   }
 
+  async logout() {
+    try {
+      await axios.post('/auth/logout')
+    } catch (error) {
+      console.log('Error loggin out the user', error)
+    }
+  }
+
   render() {
     const { user, error } = this.state
 
@@ -53,7 +63,7 @@ export default class App extends Component {
       <div>
         {
           user.id ?
-            <h1>We need a navbar and user info here</h1>
+            <Navbar logout={this.logout} />
             :
             <div>
               <Login
