@@ -3,7 +3,9 @@ import React, { Component } from 'react'
 export default class Transactions extends Component {
   constructor(props) {
     super(props)
-    state = {}
+    this.state = {
+      user: {}
+    }
   }
 
   render() {

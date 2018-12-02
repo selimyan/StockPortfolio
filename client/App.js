@@ -14,7 +14,7 @@ export default class App extends Component {
     }
     this.login = this.login.bind(this)
     this.register = this.register.bind(this)
-    this.logout - this.logout.bind(this)
+    this.logout = this.logout.bind(this)
   }
 
   async componentDidMount() {
@@ -52,6 +52,7 @@ export default class App extends Component {
   async logout() {
     try {
       await axios.post('/auth/logout')
+      this.setState({ user: {} })
     } catch (error) {
       console.log('Error loggin out the user', error)
     }
