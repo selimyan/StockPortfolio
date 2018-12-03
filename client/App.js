@@ -1,9 +1,9 @@
 import React, { Component } from "react"
 import axios from 'axios'
-import { Route } from 'react-router-dom'
 import Login from './components/Login'
 import Navbar from './components/Navbar'
 import Routes from './Routes'
+import Portfolio from './components/Portfolio'
 
 export default class App extends Component {
   constructor(props) {
@@ -67,6 +67,7 @@ export default class App extends Component {
           user.id ?
             <div>
               <Navbar logout={this.logout} />
+              <Portfolio user={user} />
               <Routes user={user} />
             </div>
             :
