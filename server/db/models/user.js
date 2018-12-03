@@ -26,12 +26,24 @@ const User = db.define('user', {
   name: {
     type: Sequelize.STRING,
     allowNull: false
+  },
+  cash: {
+    type: Sequelize.INTEGER,
+    defaultValue: 500000,
+    validate: {
+      min: 0
+    }
   }
 })
 
 //instance methods
 User.prototype.correctPassword = function (password) {
   return User.encryptPassword(password, this.salt()) === this.password()
+}
+
+User.prototype.getStocks = function () {
+  const transactions = this.getTransactions()
+  console.log('TRANSACTIONS', transactions)
 }
 
 //class methods
