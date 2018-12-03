@@ -1,25 +1,28 @@
 import React, { Component } from 'react'
-import { SSL_OP_NO_TICKET } from 'constants';
+import axios from 'axios'
 
 export default class Portfolio extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      user: { id: 1 },
-      value: 594334,
-      portfolio: [
-        { ticker: 'aapl', qty: 6, price: 0 },
-        { ticker: 'stwd', qty: 40, price: 0 },
-        { ticker: 'nflx', qty: 86, price: 0 },
-        { ticker: 'msft', qty: 10, price: 0 },
-        { ticker: 'att', qty: 5, price: 0 },
-      ],
-      cash: 500000,
+      user: {},
+      value: 0,
+      portfolio: [],
     }
   }
 
+  async componentDidMount() {
+    const { user } = this.props
+    const { data } = await axios.get('/api/portfolio')
+    this.setState({
+      user,
+      portfolio: data
+    })
+  }
+
   render() {
-    const { value, portfolio, cash } = this.state
+    const { value, portfolio, user } = this.state
+    console.log('-----', portfolio)
     return (
       <div>
         <div>
@@ -28,7 +31,7 @@ export default class Portfolio extends Component {
             {portfolio.map((stock) => {
               return (
                 <div key={stock.ticker}>
-                  <div>{stock.ticker} - {stock.qty} Shares</div>
+                  <div>{stock.ticker} - {stock.quantity} Shares</div>
                   <div>${stock.price}</div>
                 </div>
               )
@@ -36,7 +39,7 @@ export default class Portfolio extends Component {
           </div>
         </div>
         <div>
-          <h2>Cash - ${(cash / 100).toFixed(2)}</h2>
+          <h2>Cash - ${(user.cash / 100).toFixed(2)}</h2>
         </div>
       </div>
     )

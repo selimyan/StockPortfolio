@@ -19,7 +19,7 @@ export default class App extends Component {
 
   async componentDidMount() {
     try {
-      const { data } = await axios.get('/auth/me')
+      const { data } = await axios.get('api/auth/me')
       this.setState({
         user: data,
         error: ''
@@ -31,7 +31,7 @@ export default class App extends Component {
 
   async login(user) {
     try {
-      const { data } = await axios.post('/auth/login', user)
+      const { data } = await axios.post('api/auth/login', user)
       if (data.error) this.setState({ error: data.error })
       else this.setState({ user: data, error: '' })
     } catch (error) {
@@ -41,7 +41,7 @@ export default class App extends Component {
 
   async register(user) {
     try {
-      const { data } = await axios.post('/auth/signup', user)
+      const { data } = await axios.post('api/auth/signup', user)
       if (data.error) this.setState({ error: data.error })
       else this.setState({ user: data, error: '' })
     } catch (error) {
@@ -51,7 +51,7 @@ export default class App extends Component {
 
   async logout() {
     try {
-      await axios.post('/auth/logout')
+      await axios.post('api/auth/logout')
       this.setState({ user: {} })
     } catch (error) {
       console.log('Error loggin out the user', error)
@@ -60,7 +60,6 @@ export default class App extends Component {
 
   render() {
     const { user, error } = this.state
-
     return (
       <div>
         {

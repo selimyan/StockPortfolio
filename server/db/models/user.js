@@ -41,10 +41,10 @@ User.prototype.correctPassword = function (password) {
   return User.encryptPassword(password, this.salt()) === this.password()
 }
 
-User.prototype.getStocks = function () {
-  const transactions = this.getTransactions()
-  console.log('TRANSACTIONS', transactions)
-}
+// User.prototype.getStocks = function () {
+//   const transactions = this.getTransactions()
+//   console.log('TRANSACTIONS', transactions)
+// }
 
 //class methods
 User.generateSalt = function () {

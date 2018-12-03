@@ -41,7 +41,7 @@ app.use(passport.initialize())
 app.use(passport.session())
 
 //routes
-app.use('/auth', require('./auth'))
+app.use('/api', require('./api'))
 
 //static
 app.use(express.static(path.join(__dirname, '..', 'public')))
