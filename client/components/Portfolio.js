@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import axios from 'axios'
+import TransactionForm from './TransactionForm'
 import { stringifyTickers } from './utils'
 
 export default class Portfolio extends Component {
@@ -77,6 +78,7 @@ export default class Portfolio extends Component {
         </div>
         <div>
           <h2>Cash - ${(user.cash / 100).toFixed(2)}</h2>
+          <TransactionForm />
         </div>
       </div>
     )
