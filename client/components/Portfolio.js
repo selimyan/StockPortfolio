@@ -18,7 +18,6 @@ export default class Portfolio extends Component {
       const { data } = await axios.get('/api/portfolio')
       const portfolio = await this.getCurrentInfo(data)
       const value = this.getCurrentValue(portfolio)
-      console.log('---value', value)
       this.setState({
         user,
         portfolio,
@@ -51,20 +50,16 @@ export default class Portfolio extends Component {
   }
 
   getCurrentValue(portfolio) {
-    console.log('in value portfolio', portfolio)
     let total = 0
     for (let i = 0; i < portfolio.length; i++) {
       let stock = portfolio[i]
-      console.log('ticker', stock.value)
       total += stock.value
     }
-    console.log('tooote', total)
     return total
   }
 
   render() {
     const { value, portfolio, user } = this.state
-    console.log('-----', portfolio)
     return (
       <div>
         <div>
