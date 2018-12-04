@@ -20,6 +20,7 @@ export default class TransactionForm extends Component {
   handleSubmit(event) {
     event.preventDefault()
     this.props.buyShares(this.state)
+    this.setState({ ticker: '', quantity: '' })
   }
 
   render() {
