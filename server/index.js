@@ -64,11 +64,11 @@ app.use('*', (req, res, next) => {
   res.sendFile(path.join(__dirname, '..', 'public/index.html'))
 })
 
-//handle errors
+//handle errors from routes
 app.use((err, req, res, next) => {
-  console.error(err)
+  console.error(err.response.data)
   console.error(err.stack)
-  res.status(err.status || 500).send(err.message || 'Internal server error.')
+  res.send(err.response.data)
 })
 
 module.exports = app

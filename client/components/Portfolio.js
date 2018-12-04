@@ -46,13 +46,20 @@ export default class Portfolio extends Component {
   }
 
   async buyShares(purchaseInfo) {
-    const { data } = await axios.post('/api/transactions', purchaseInfo)
-    if (data.error) this.setState({ error: data.error })
-    else this.fetchPortfolio()
+    try {
+      const { data } = await axios.post('/api/transactions', purchaseInfo)
+      let error
+      if (data === 'Unknown symbol') error = data
+      if (data.error) error = data.error
+      if (error) this.setState({ error })
+      else this.fetchPortfolio()
+    } catch (error) {
+      console.log(error)
+    }
   }
 
   render() {
-    const { value, portfolio, user } = this.state
+    const { value, portfolio, user, error } = this.state
     return (
       <div>
         <div>
@@ -71,6 +78,9 @@ export default class Portfolio extends Component {
         <div>
           <h2>Cash - ${(user.cash / 100).toFixed(2)}</h2>
           <TransactionForm buyShares={this.buyShares} />
+          {error &&
+            <h4> {error} </h4>
+          }
         </div>
       </div>
     )
