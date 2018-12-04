@@ -1,13 +1,11 @@
 const router = require('express').Router()
 const axios = require('axios')
 const { User, Transaction } = require('../db/models')
-const { getStocks } = require('./utils')
 
 router.get('/', async (req, res, next) => {
   try {
     const transactions = await req.user.getTransactions()
-    const portfolio = getStocks(transactions)
-    res.json(portfolio)
+    res.json(transactions)
   } catch (error) {
     next(error)
   }

@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import axios from 'axios'
 import TransactionForm from './TransactionForm'
-import { stringifyTickers, getCurrentValue, createPortfolio } from './utils'
+import { stringifyTickers, getCurrentValue, createPortfolio, getStocks } from './utils'
 
 export default class Portfolio extends Component {
   constructor(props) {
@@ -23,7 +23,8 @@ export default class Portfolio extends Component {
     try {
       const { user } = this.props
       const { data } = await axios.get('/api/transactions')
-      const portfolio = await this.getCurrentPortfolio(data)
+      const stocks = getStocks(data)
+      const portfolio = await this.getCurrentPortfolio(stocks)
       const value = getCurrentValue(portfolio)
       this.setState({
         user,
