@@ -51,3 +51,7 @@ export const getStocks = (transactions) => {
 
   return portfolio
 }
+
+export const getDate = (date) => {
+  return `${date.slice(11, 19)} ${date.slice(0, 10)}`
+}
