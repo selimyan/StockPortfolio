@@ -11,6 +11,7 @@ export default class Portfolio extends Component {
       value: 0,
       portfolio: [],
     }
+    this.buyShares = this.buyShares.bind(this)
   }
 
   async componentDidMount() {
@@ -59,6 +60,12 @@ export default class Portfolio extends Component {
     return total
   }
 
+  async buyShares(purchaseInfo) {
+    console.log('purchase info', purchaseInfo)
+    const { data } = await axios.post('/api/transactions', purchaseInfo)
+    console.log('data', data)
+  }
+
   render() {
     const { value, portfolio, user } = this.state
     return (
@@ -78,7 +85,7 @@ export default class Portfolio extends Component {
         </div>
         <div>
           <h2>Cash - ${(user.cash / 100).toFixed(2)}</h2>
-          <TransactionForm />
+          <TransactionForm buyShares={this.buyShares} />
         </div>
       </div>
     )
