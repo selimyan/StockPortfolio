@@ -66,9 +66,13 @@ app.use('*', (req, res, next) => {
 
 //handle errors from routes
 app.use((err, req, res, next) => {
-  console.error(err.response.data)
-  console.error(err.stack)
-  res.send(err.response.data)
+  if (err.response && err.response.data) {
+    console.error(err.stack)
+    res.send(err.response.data)
+  } else {
+    console.error(err)
+    res.send('Internal server error')
+  }
 })
 
 module.exports = app

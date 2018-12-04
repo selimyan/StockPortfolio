@@ -19,7 +19,8 @@ export default class TransactionForm extends Component {
 
   handleSubmit(event) {
     event.preventDefault()
-    this.props.buyShares(this.state)
+    const { ticker, quantity } = this.state
+    this.props.buyShares({ ticker, quantity: +quantity })
     this.setState({ ticker: '', quantity: '' })
   }
 

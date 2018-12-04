@@ -16,7 +16,6 @@ router.post('/', async (req, res, next) => {
   try {
     //get current price of the stock
     const { data } = await axios.get(`https://api.iextrading.com/1.0/stock/${ticker}/price`)
-
     //check for errors
     if (!Number.isInteger(quantity) || quantity < 1) {
       res.json({ error: 'Invalid quantity' })

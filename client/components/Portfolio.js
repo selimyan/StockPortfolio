@@ -50,12 +50,13 @@ export default class Portfolio extends Component {
     try {
       const { data } = await axios.post('/api/transactions', purchaseInfo)
       let error
+      console.log('data', data)
       if (data === 'Unknown symbol') error = data
       if (data.error) error = data.error
       if (error) this.setState({ error })
       else this.fetchPortfolio()
     } catch (error) {
-      console.log(error)
+      console.log('caught', error)
     }
   }
 
