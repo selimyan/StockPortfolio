@@ -15,7 +15,11 @@ export default class Portfolio extends Component {
     this.buyShares = this.buyShares.bind(this)
   }
 
-  async componentDidMount() {
+  componentDidMount() {
+    this.fetchPortfolio()
+  }
+
+  async fetchPortfolio() {
     try {
       const { user } = this.props
       const { data } = await axios.get('/api/portfolio')
@@ -43,11 +47,8 @@ export default class Portfolio extends Component {
 
   async buyShares(purchaseInfo) {
     const { data } = await axios.post('/api/transactions', purchaseInfo)
-    console.log('data', data)
     if (data.error) this.setState({ error: data.error })
-    else {
-
-    }
+    else this.fetchPortfolio()
   }
 
   render() {
