@@ -22,7 +22,7 @@ export default class Portfolio extends Component {
   async fetchPortfolio() {
     try {
       const { user } = this.props
-      const { data } = await axios.get('/api/portfolio')
+      const { data } = await axios.get('/api/transactions')
       const portfolio = await this.getCurrentPortfolio(data)
       const value = getCurrentValue(portfolio)
       this.setState({

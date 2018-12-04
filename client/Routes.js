@@ -18,6 +18,10 @@ export default class Routes extends Component {
           exact path='/transactions'
           render={(props) => <Transactions {...props} user={user} />}
         />
+        <Route
+          exact path='/'
+          render={(props) => <Portfolio {...props} user={user} />}
+        />
       </Switch>
     )
   }

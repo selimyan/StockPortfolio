@@ -66,7 +66,6 @@ export default class App extends Component {
           user.id ?
             <div>
               <Navbar logout={this.logout} />
-              <Portfolio user={user} />
               <Routes user={user} />
             </div>
             :
