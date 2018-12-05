@@ -8,6 +8,11 @@ const passport = require('passport')
 const SequelizeStore = require('connect-session-sequelize')(session.Store)
 const sessionStore = new SequelizeStore({ db })
 
+//quit Mocha after tests
+if (process.env.NODE_ENV === 'test') {
+  after('close the session store', () => sessionStore.stopExpiringSessions());
+}
+
 //register passport
 passport.serializeUser((user, done) => done(null, user.id))
 
@@ -53,6 +58,7 @@ app.listen(8080, () => console.log('Sailing from port 8080!'))
 
 //404
 app.use((req, res, next) => {
+  console.log('are we here??')
   path.extname(req.path.length > 0
     ? res.status(404).send('Not found')
     : next()
