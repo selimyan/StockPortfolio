@@ -23,14 +23,16 @@ export default class Portfolio extends Component {
     try {
       const { user } = this.props
       const { data } = await axios.get('/api/transactions')
-      const stocks = getStocks(data)
-      const portfolio = await this.getCurrentPortfolio(stocks)
-      const value = getCurrentValue(portfolio)
-      this.setState({
-        user,
-        portfolio,
-        value
-      })
+      if (data.length) {
+        const stocks = getStocks(data)
+        const portfolio = await this.getCurrentPortfolio(stocks)
+        const value = getCurrentValue(portfolio)
+        this.setState({
+          user,
+          portfolio,
+          value
+        })
+      }
     } catch (error) {
       console.log(error)
     }
@@ -97,7 +99,7 @@ export default class Portfolio extends Component {
             </div>
           </div>
           <div className='col-sm-4'>
-            <h2>Cash - ${(user.cash / 100).toFixed(2)}</h2>
+            <h2>Cash - ${((user.cash || 0) / 100).toFixed(2)}</h2>
             <TransactionForm buyShares={this.buyShares} />
             {message &&
               <h4> {message} </h4>

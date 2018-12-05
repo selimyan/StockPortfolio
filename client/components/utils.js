@@ -33,7 +33,7 @@ export const createPortfolio = (stocks, data) => {
 export const getStocks = (transactions) => {
   const stocks = {}
   transactions.forEach((transaction) => {
-    let ticker = transaction.ticker
+    let ticker = transaction.ticker.toUpperCase()
     if (stocks[ticker]) {
       stocks[ticker] += transaction.quantity
     } else {
@@ -44,7 +44,7 @@ export const getStocks = (transactions) => {
   let portfolio = []
   for (const stock in stocks) {
     portfolio.push({
-      ticker: stock.toUpperCase(),
+      ticker: stock,
       quantity: stocks[stock]
     })
   }

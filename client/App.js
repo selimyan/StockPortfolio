@@ -3,7 +3,6 @@ import axios from 'axios'
 import Login from './components/Login'
 import Navbar from './components/Navbar'
 import Routes from './Routes'
-import Portfolio from './components/Portfolio'
 
 export default class App extends Component {
   constructor(props) {
@@ -42,6 +41,7 @@ export default class App extends Component {
   async register(user) {
     try {
       const { data } = await axios.post('api/auth/signup', user)
+      console.log('USER', data)
       if (data.error) this.setState({ error: data.error })
       else this.setState({ user: data, error: '' })
     } catch (error) {
