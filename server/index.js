@@ -58,11 +58,9 @@ app.listen(8080, () => console.log('Sailing from port 8080!'))
 
 //404
 app.use((req, res, next) => {
-  console.log('are we here??')
-  path.extname(req.path.length > 0
+  path.extname(req.path).length
     ? res.status(404).send('Not found')
     : next()
-  )
 })
 
 //send index.html
