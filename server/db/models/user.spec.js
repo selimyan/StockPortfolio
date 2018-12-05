@@ -4,8 +4,8 @@ const { User } = require('../models')
 
 describe('User model', () => {
 
-  beforeEach(() => {
-    return db.sync({ force: true })
+  beforeEach(async () => {
+    await db.sync({ force: true })
   })
 
   describe('user information', () => {
