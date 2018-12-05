@@ -10,7 +10,7 @@ export default class Portfolio extends Component {
       user: {},
       value: 0,
       portfolio: [],
-      error: ''
+      message: ''
     }
     this.buyShares = this.buyShares.bind(this)
   }
@@ -48,20 +48,24 @@ export default class Portfolio extends Component {
 
   async buyShares(purchaseInfo) {
     try {
+      this.setState({ message: '' })
       const { data } = await axios.post('/api/transactions', purchaseInfo)
-      let error
-      console.log('data', data)
-      if (data === 'Unknown symbol') error = data
-      if (data.error) error = data.error
-      if (error) this.setState({ error })
-      else this.fetchPortfolio()
+      let message
+      if (data === 'Unknown symbol') message = data
+      else if (data.error) message = data.error
+      if (message) this.setState({ message })
+      else {
+        this.setState({ message: 'Purchased!' })
+        await this.fetchPortfolio()
+        return 'Success'
+      }
     } catch (error) {
       console.log('caught', error)
     }
   }
 
   render() {
-    const { value, portfolio, user, error } = this.state
+    const { value, portfolio, user, message } = this.state
     return (
       <div className='container my-5 pt-5'>
         <h1 className='mb-3'>Portfolio (${value.toFixed(2)})</h1>
@@ -95,8 +99,8 @@ export default class Portfolio extends Component {
           <div className='col-sm-4'>
             <h2>Cash - ${(user.cash / 100).toFixed(2)}</h2>
             <TransactionForm buyShares={this.buyShares} />
-            {error &&
-              <h4> {error} </h4>
+            {message &&
+              <h4> {message} </h4>
             }
           </div>
         </div>

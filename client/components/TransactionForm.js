@@ -17,11 +17,12 @@ export default class TransactionForm extends Component {
     })
   }
 
-  handleSubmit(event) {
+  async handleSubmit(event) {
     event.preventDefault()
     const { ticker, quantity } = this.state
-    this.props.buyShares({ ticker, quantity: +quantity })
-    this.setState({ ticker: '', quantity: '' })
+    const bought = await this.props.buyShares({ ticker, quantity: +quantity })
+    console.log(bought)
+    if (bought) this.setState({ ticker: '', quantity: '' })
   }
 
   render() {
