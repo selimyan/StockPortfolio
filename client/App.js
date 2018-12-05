@@ -14,6 +14,7 @@ export default class App extends Component {
     this.login = this.login.bind(this)
     this.register = this.register.bind(this)
     this.logout = this.logout.bind(this)
+    this.clearError = this.clearError.bind(this)
   }
 
   async componentDidMount() {
@@ -41,10 +42,10 @@ export default class App extends Component {
   async register(user) {
     try {
       const { data } = await axios.post('api/auth/signup', user)
-      console.log('USER', data)
       if (data.error) this.setState({ error: data.error })
       else this.setState({ user: data, error: '' })
     } catch (error) {
+      this.setState({ error: 'User already exists' })
       console.log('Error registering the user', error)
     }
   }
@@ -56,6 +57,10 @@ export default class App extends Component {
     } catch (error) {
       console.log('Error loggin out the user', error)
     }
+  }
+
+  clearError() {
+    this.setState({ error: '' })
   }
 
   render() {
@@ -73,6 +78,7 @@ export default class App extends Component {
               error={error}
               login={this.login}
               register={this.register}
+              clearError={this.clearError}
             />
         }
       </div>

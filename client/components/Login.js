@@ -7,7 +7,6 @@ export default class Login extends Component {
       name: '',
       email: '',
       password: '',
-      error: '',
       newUser: false
     }
     this.toggleAuth = this.toggleAuth.bind(this)
@@ -17,6 +16,7 @@ export default class Login extends Component {
 
   toggleAuth(event) {
     event.preventDefault()
+    this.props.clearError()
     this.setState({
       newUser: !this.state.newUser
     })
@@ -93,7 +93,7 @@ export default class Login extends Component {
                 {buttonName}
               </button>
             </div>
-            {error && <p>{error}</p>}
+            {error && <p className='text-danger'>{error}</p>}
           </form>
           <div>
             {newUser
