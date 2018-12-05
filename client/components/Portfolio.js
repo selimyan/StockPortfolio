@@ -58,8 +58,8 @@ export default class Portfolio extends Component {
       else if (data.error) message = data.error
       if (message) this.setState({ message })
       else {
-        this.setState({ message: 'Purchased!' })
         await this.fetchPortfolio()
+        this.setState({ message: 'Purchased!', user: data.user })
         return 'Success'
       }
     } catch (error) {

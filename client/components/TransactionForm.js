@@ -21,7 +21,6 @@ export default class TransactionForm extends Component {
     event.preventDefault()
     const { ticker, quantity } = this.state
     const bought = await this.props.buyShares({ ticker, quantity: +quantity })
-    console.log(bought)
     if (bought) this.setState({ ticker: '', quantity: '' })
   }
 

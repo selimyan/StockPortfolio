@@ -28,7 +28,7 @@ router.post('/', async (req, res, next) => {
 
         //create transaction and update user
       } else {
-        const transaction = await Transaction.create({
+        await Transaction.create({
           ticker,
           quantity,
           price,
@@ -39,7 +39,7 @@ router.post('/', async (req, res, next) => {
         },
           { returning: true, where: { id } }
         )
-        res.json({ transaction, updatedUser })
+        res.json({ user: updatedUser })
       }
     }
   } catch (err) {
