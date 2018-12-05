@@ -31,6 +31,7 @@ export default class TransactionForm extends Component {
         <form onSubmit={this.handleSubmit}>
           <div>
             <input
+              className='form-control'
               name='ticker'
               type='text'
               placeholder='Ticker'
@@ -40,6 +41,7 @@ export default class TransactionForm extends Component {
           </div>
           <div>
             <input
+              className='form-control'
               name='quantity'
               type='number'
               placeholder='Quantity'
@@ -49,7 +51,12 @@ export default class TransactionForm extends Component {
             />
           </div>
           <div>
-            <button type='submit'> Buy </button>
+            <button
+              type='submit'
+              className='btn btn-secondary form-control'
+            >
+              Buy
+            </button>
           </div>
         </form>
       </div>

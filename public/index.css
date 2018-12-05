@@ -11,5 +11,10 @@ body {
 }
 
 .table {
-  width: 75%
+  width: 75%;
+}
+
+.form-control {
+  margin-bottom: 0.5rem;
+  width: 80%;
 }
