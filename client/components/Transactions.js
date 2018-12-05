@@ -17,17 +17,31 @@ export default class Transactions extends Component {
 
   render() {
     return (
-      <div>
-        <h1>Transactions</h1>
+      <div className='container my-5 pt-5'>
+        <h1 className='mb-3'>Transactions</h1>
         <div>
-          {this.state.transactions.map((transaction) => {
-            return (
-              <div key={transaction.id}>
-                {transaction.ticker} - {transaction.quantity} Shares
-              @ ${transaction.price} | on {getDate(transaction.createdAt)}
-              </div>
-            )
-          })}
+          <table className='table'>
+            <thead>
+              <tr>
+                <th> Stock </th>
+                <th> Shares </th>
+                <th> Price </th>
+                <th> Date </th>
+              </tr>
+            </thead>
+            <tbody>
+              {this.state.transactions.map((transaction) => {
+                return (
+                  <tr key={transaction.id}>
+                    <td>{transaction.ticker}</td>
+                    <td>{transaction.quantity}</td>
+                    <td>${transaction.price}</td>
+                    <td>{getDate(transaction.createdAt)}</td>
+                  </tr>
+                )
+              })}
+            </tbody>
+          </table>
         </div>
       </div>
     )
