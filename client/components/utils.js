@@ -6,7 +6,7 @@ export const stringifyTickers = (portfolio) => {
   return tickers.join(',').toLowerCase()
 }
 
-export const getCurrentValue = (portfolio) => {
+export const getCurrentTotalValue = (portfolio) => {
   let total = 0
   for (let i = 0; i < portfolio.length; i++) {
     let stock = portfolio[i]
@@ -23,6 +23,7 @@ export const createPortfolio = (stocks, data) => {
       ticker: currentStock.ticker,
       quantity: currentStock.quantity,
       price: data[currentStock.ticker].quote.latestPrice,
+      open: data[currentStock.ticker].quote.open,
       value: data[currentStock.ticker].quote.latestPrice * currentStock.quantity
     }
     portfolio.push(item)

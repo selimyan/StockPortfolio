@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
 import axios from 'axios'
 import TransactionForm from './TransactionForm'
-import { stringifyTickers, getCurrentValue, createPortfolio, getStocks } from './utils'
+import Stock from './Stock'
+import { stringifyTickers, getCurrentTotalValue, createPortfolio, getStocks } from './utils'
 
 export default class Portfolio extends Component {
   constructor(props) {
@@ -22,13 +23,13 @@ export default class Portfolio extends Component {
   async fetchPortfolio() {
     try {
       const { user } = this.props
+      this.setState({ user })
       const { data } = await axios.get('/api/transactions')
       if (data.length) {
         const stocks = getStocks(data)
         const portfolio = await this.getCurrentPortfolio(stocks)
-        const value = getCurrentValue(portfolio)
+        const value = getCurrentTotalValue(portfolio)
         this.setState({
-          user,
           portfolio,
           value
         })
@@ -86,12 +87,7 @@ export default class Portfolio extends Component {
                 <tbody>
                   {portfolio.map((stock) => {
                     return (
-                      <tr key={stock.ticker}>
-                        <td>{stock.ticker}</td>
-                        <td>{stock.quantity}</td>
-                        <td>${stock.price}</td>
-                        <td>${(stock.value).toFixed(2)}</td>
-                      </tr>
+                      <Stock stock={stock} key={stock.ticker} />
                     )
                   })}
                 </tbody>
@@ -99,7 +95,7 @@ export default class Portfolio extends Component {
             </div>
           </div>
           <div className='col-sm-4'>
-            <h2>Cash - ${((user.cash || 0) / 100).toFixed(2)}</h2>
+            <h2>Cash - ${((user.cash) / 100).toFixed(2)}</h2>
             <TransactionForm buyShares={this.buyShares} />
             {message &&
               <h4> {message} </h4>
