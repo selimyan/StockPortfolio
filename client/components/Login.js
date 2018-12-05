@@ -48,55 +48,61 @@ export default class Login extends Component {
     const buttonName = newUser ? 'Register' : 'Login'
 
     return (
-      <div>
-        <form onSubmit={this.handleSubmit}>
-          {
-            newUser &&
+      <div className='jumbotron mh-100 row'>
+        <div className='col'></div>
+        <div className='col'>
+          <form onSubmit={this.handleSubmit} className='mt-5 w-100'>
+            {
+              newUser &&
+              <div>
+                <input
+                  className='form-control'
+                  name='name'
+                  placeholder='name'
+                  type='text'
+                  value={name}
+                  onChange={this.handleChange}
+                />
+              </div>
+            }
             <div>
-              <label htmlFor='name'>
-                <small> Name </small>
-              </label>
               <input
-                name='name'
+                className='form-control'
+                name='email'
+                placeholder='email'
                 type='text'
-                value={name}
+                value={email}
                 onChange={this.handleChange}
               />
             </div>
-          }
+            <div>
+              <input
+                className='form-control'
+                name='password'
+                placeholder='password'
+                type='password'
+                value={password}
+                onChange={this.handleChange}
+              />
+            </div>
+            <div>
+              <button
+                type='submit'
+                className='btn btn-secondary form-control'
+              >
+                {buttonName}
+              </button>
+            </div>
+            {error && <p>{error}</p>}
+          </form>
           <div>
-            <label htmlFor='email'>
-              <small> Email </small>
-            </label>
-            <input
-              name='email'
-              type='text'
-              value={email}
-              onChange={this.handleChange}
-            />
+            {newUser
+              ? <p>Already registered? <a href='' onClick={this.toggleAuth}>Login</a></p>
+              : <p>Not registered? <a href='' onClick={this.toggleAuth}>Register</a></p>
+            }
           </div>
-          <div>
-            <label htmlFor='password'>
-              <small> Password </small>
-            </label>
-            <input
-              name='password'
-              type='password'
-              value={password}
-              onChange={this.handleChange}
-            />
-          </div>
-          <div>
-            <button type='submit'> {buttonName} </button>
-          </div>
-          {error && <p>{error}</p>}
-        </form>
-        <div>
-          {newUser
-            ? <p>Already registered? <a href='' onClick={this.toggleAuth}>Login</a></p>
-            : <p>Not registered? <a href='' onClick={this.toggleAuth}>Register</a></p>
-          }
         </div>
+        <div className='col'></div>
       </div>
     )
   }

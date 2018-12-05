@@ -69,13 +69,11 @@ export default class App extends Component {
               <Routes user={user} />
             </div>
             :
-            <div>
-              <Login
-                error={error}
-                login={this.login}
-                register={this.register}
-              />
-            </div>
+            <Login
+              error={error}
+              login={this.login}
+              register={this.register}
+            />
         }
       </div>
     )
