@@ -35,7 +35,7 @@ export default class Transactions extends Component {
                   <tr key={transaction.id}>
                     <td>{transaction.ticker.toUpperCase()}</td>
                     <td>{transaction.quantity}</td>
-                    <td>${transaction.price}</td>
+                    <td>${(transaction.price / 100).toFixed(2)}</td>
                     <td>{getDate(transaction.createdAt)}</td>
                   </tr>
                 )
