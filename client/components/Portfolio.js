@@ -63,26 +63,42 @@ export default class Portfolio extends Component {
   render() {
     const { value, portfolio, user, error } = this.state
     return (
-      <div>
-        <div>
-          <h1>Portfolio (${value.toFixed(2)})</h1>
-          <div>
-            {portfolio.map((stock) => {
-              return (
-                <div key={stock.ticker}>
-                  <div>{stock.ticker} - {stock.quantity} Shares @ {stock.price}</div>
-                  <div>${(stock.value).toFixed(2)}</div>
-                </div>
-              )
-            })}
+      <div className='container my-5 pt-5'>
+        <h1 className='mb-3'>Portfolio (${value.toFixed(2)})</h1>
+        <div className='row'>
+          <div className='col-sm-8 mx-auto'>
+            <div>
+              <table className='table'>
+                <thead>
+                  <tr>
+                    <th> Stock </th>
+                    <th> Shares </th>
+                    <th> Current Price </th>
+                    <th> Current Value </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {portfolio.map((stock) => {
+                    return (
+                      <tr key={stock.ticker}>
+                        <td>{stock.ticker}</td>
+                        <td>{stock.quantity}</td>
+                        <td>${stock.price}</td>
+                        <td>${(stock.value).toFixed(2)}</td>
+                      </tr>
+                    )
+                  })}
+                </tbody>
+              </table>
+            </div>
           </div>
-        </div>
-        <div>
-          <h2>Cash - ${(user.cash / 100).toFixed(2)}</h2>
-          <TransactionForm buyShares={this.buyShares} />
-          {error &&
-            <h4> {error} </h4>
-          }
+          <div className='col-sm-4'>
+            <h2>Cash - ${(user.cash / 100).toFixed(2)}</h2>
+            <TransactionForm buyShares={this.buyShares} />
+            {error &&
+              <h4> {error} </h4>
+            }
+          </div>
         </div>
       </div>
     )
