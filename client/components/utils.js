@@ -54,6 +54,5 @@ export const getStocks = (transactions) => {
 }
 
 export const getDate = (date) => {
-  console.log('date', date)
   return `${date.slice(11, 19)} | ${date.slice(0, 10)}`
 }

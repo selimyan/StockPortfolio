@@ -19,30 +19,30 @@ export default class Transactions extends Component {
     return (
       <div className='container my-5 pt-5'>
         <h1 className='mb-3'>Transactions</h1>
-        <div>
-          <table className='table'>
-            <thead>
-              <tr>
-                <th> Stock </th>
-                <th> Shares </th>
-                <th> Price </th>
-                <th> Date </th>
-              </tr>
-            </thead>
-            <tbody>
-              {this.state.transactions.map((transaction) => {
-                return (
-                  <tr key={transaction.id}>
-                    <td>{transaction.ticker.toUpperCase()}</td>
-                    <td>{transaction.quantity}</td>
-                    <td>${(transaction.price / 100).toFixed(2)}</td>
-                    <td>{getDate(transaction.createdAt)}</td>
-                  </tr>
-                )
-              })}
-            </tbody>
-          </table>
-        </div>
+
+        <table className='table'>
+          <thead>
+            <tr>
+              <th> Stock </th>
+              <th> Shares </th>
+              <th> Price </th>
+              <th> Date </th>
+            </tr>
+          </thead>
+          <tbody>
+            {this.state.transactions.map((transaction) => {
+              return (
+                <tr key={transaction.id}>
+                  <td>{transaction.ticker.toUpperCase()}</td>
+                  <td>{transaction.quantity}</td>
+                  <td>${(transaction.price / 100).toFixed(2)}</td>
+                  <td>{getDate(transaction.createdAt)}</td>
+                </tr>
+              )
+            })}
+          </tbody>
+        </table>
+
       </div>
     )
   }

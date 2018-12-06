@@ -6,18 +6,14 @@ const Stock = ({ stock }) => {
   if (price > open) color = 'text-success'
   if (price < open) color = 'text-danger'
 
-  if (color) {
-    return (
-      <tr className={color}>
-        <td>{ticker}</td>
-        <td>{quantity}</td>
-        <td>${price}</td>
-        <td>${(value).toFixed(2)}</td>
-      </tr>
-    )
-  } else {
-    return null
-  }
+  return (
+    <tr className={color}>
+      <td>{ticker}</td>
+      <td>{quantity}</td>
+      <td>${price}</td>
+      <td>${(value).toFixed(2)}</td>
+    </tr>
+  )
 }
 
 export default Stock

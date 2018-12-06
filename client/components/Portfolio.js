@@ -69,38 +69,40 @@ export default class Portfolio extends Component {
 
   render() {
     const { value, portfolio, user, message } = this.state
+    const cash = ((user.cash) / 100).toFixed(2)
+
     return (
       <div className='container my-5 pt-5'>
+
         <h1 className='mb-3'>Portfolio (${value.toFixed(2)})</h1>
         <div className='row'>
+
           <div className='col-sm-8 mx-auto'>
-            <div>
-              <table className='table'>
-                <thead>
-                  <tr>
-                    <th> Stock </th>
-                    <th> Shares </th>
-                    <th> Current Price </th>
-                    <th> Current Value </th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {portfolio.map((stock) => {
-                    return (
-                      <Stock stock={stock} key={stock.ticker} />
-                    )
-                  })}
-                </tbody>
-              </table>
-            </div>
+            <table className='table'>
+              <thead>
+                <tr>
+                  <th> Stock </th>
+                  <th> Shares </th>
+                  <th> Current Price </th>
+                  <th> Current Value </th>
+                </tr>
+              </thead>
+              <tbody>
+                {portfolio.map((stock) => {
+                  return (
+                    <Stock stock={stock} key={stock.ticker} />
+                  )
+                })}
+              </tbody>
+            </table>
           </div>
+
           <div className='col-sm-4'>
-            <h2>Cash - ${((user.cash) / 100).toFixed(2)}</h2>
+            <h2>Cash - ${cash}</h2>
             <TransactionForm buyShares={this.buyShares} />
-            {message &&
-              <h4> {message} </h4>
-            }
+            {message && <h4> {message} </h4>}
           </div>
+
         </div>
       </div>
     )

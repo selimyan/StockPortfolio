@@ -21,12 +21,10 @@ router.post('/', async (req, res, next) => {
       //get current price of the stock
       const { data } = await axios.get(`https://api.iextrading.com/1.0/stock/${ticker}/price`)
       const price = data * 100
-      console.log('PRICE', price)
 
       //ensure there are enough funds for the transaction
       const toBePaid = price * quantity
       const { cash, id } = await User.findById(req.user.id)
-      console.log('CAsh', cash)
       if (cash < toBePaid) {
         res.send({ error: 'You balance is lower than your current purchase' })
 
