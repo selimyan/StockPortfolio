@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import axios from 'axios'
 import TransactionForm from './TransactionForm'
 import Stock from './Stock'
-import { stringifyTickers, getCurrentTotalValue, createPortfolio, getStocks } from './utils'
+import { stringifyTickers, getCurrentTotalValue, createPortfolio } from './utils'
 
 export default class Portfolio extends Component {
   constructor(props) {
@@ -17,22 +17,18 @@ export default class Portfolio extends Component {
   }
 
   componentDidMount() {
+    this.setState({ user: this.props.user })
     this.fetchPortfolio()
   }
 
   async fetchPortfolio() {
     try {
-      const { user } = this.props
-      this.setState({ user })
-      const { data } = await axios.get('/api/transactions')
+      const { data } = await axios.get('/api/stocks')
       if (data.length) {
-        const stocks = getStocks(data)
-        const portfolio = await this.getCurrentPortfolio(stocks)
+        const portfolio = await this.getCurrentPortfolio(data)
         const value = getCurrentTotalValue(portfolio)
-        this.setState({
-          portfolio,
-          value
-        })
+
+        this.setState({ portfolio, value })
       }
     } catch (error) {
       console.log(error)

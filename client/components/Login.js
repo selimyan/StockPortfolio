@@ -54,37 +54,31 @@ export default class Login extends Component {
           <form onSubmit={this.handleSubmit} className='mt-5 w-100'>
             {
               newUser &&
-              <div>
-                <input
-                  className='form-control'
-                  name='name'
-                  placeholder='name'
-                  type='text'
-                  value={name}
-                  onChange={this.handleChange}
-                />
-              </div>
-            }
-            <div>
               <input
                 className='form-control'
-                name='email'
-                placeholder='email'
+                name='name'
+                placeholder='name'
                 type='text'
-                value={email}
+                value={name}
                 onChange={this.handleChange}
               />
-            </div>
-            <div>
-              <input
-                className='form-control'
-                name='password'
-                placeholder='password'
-                type='password'
-                value={password}
-                onChange={this.handleChange}
-              />
-            </div>
+            }
+            <input
+              className='form-control'
+              name='email'
+              placeholder='email'
+              type='text'
+              value={email}
+              onChange={this.handleChange}
+            />
+            <input
+              className='form-control'
+              name='password'
+              placeholder='password'
+              type='password'
+              value={password}
+              onChange={this.handleChange}
+            />
             <div>
               <button
                 type='submit'
