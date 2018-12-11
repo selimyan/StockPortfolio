@@ -1,5 +1,5 @@
 const db = require('../server/db')
-const { User, Transaction, Share } = require('../server/db/models')
+const { User, Transaction, Stock } = require('../server/db/models')
 
 async function seed() {
   await db.sync({ force: true })
@@ -20,15 +20,15 @@ async function seed() {
     Transaction.create({ ticker: 't', quantity: 2, price: 3073, userId: 3 }),
   ])
 
-  const shares = await Promise.all([
-    Share.create({ ticker: 'aapl', quantity: 6, userId: 1 }),
-    Share.create({ ticker: 'stwd', quantity: 40, userId: 1 }),
-    Share.create({ ticker: 'ntflx', quantity: 8, userId: 2 }),
-    Share.create({ ticker: 'msft', quantity: 10, userId: 2 }),
-    Share.create({ ticker: 't', quantity: 2, userId: 3 })
+  const stocks = await Promise.all([
+    Stock.create({ ticker: 'aapl', quantity: 6, userId: 1 }),
+    Stock.create({ ticker: 'stwd', quantity: 40, userId: 1 }),
+    Stock.create({ ticker: 'ntflx', quantity: 8, userId: 2 }),
+    Stock.create({ ticker: 'msft', quantity: 10, userId: 2 }),
+    Stock.create({ ticker: 't', quantity: 2, userId: 3 })
   ])
 
-  console.log(`---seeded successfully ${users.length} users, ${transactions.length} transactions, ${shares.length} shares---`)
+  console.log(`---seeded successfully ${users.length} users, ${transactions.length} transactions, ${stocks.length} shares---`)
 
 }
 

@@ -1,13 +1,13 @@
 const User = require('./user')
 const Transaction = require('./transaction')
-const Share = require('./shares')
+const Stock = require('./stock')
 
 //associations
 User.hasMany(Transaction)
-User.hasMany(Share)
+User.hasMany(Stock)
 
 module.exports = {
   User,
   Transaction,
-  Share
+  Stock
 }

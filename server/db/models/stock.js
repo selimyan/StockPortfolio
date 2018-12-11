@@ -1,7 +1,7 @@
 const Sequelize = require('sequelize')
 const db = require('../index')
 
-const Share = db.define('share', {
+const Stock = db.define('stock', {
   ticker: {
     type: Sequelize.STRING,
     validate: {
@@ -17,4 +17,4 @@ const Share = db.define('share', {
   }
 })
 
-module.exports = Share
+module.exports = Stock
