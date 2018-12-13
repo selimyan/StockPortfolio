@@ -17,11 +17,14 @@ export const getCurrentTotalValue = (portfolio) => {
 
 export const createPortfolio = (stocks, data) => {
   return stocks.map(stock => {
+    const { ticker, quantity } = stock
+    const { latestPrice, open } = data[ticker].quote
     return {
-      ...stock,
-      price: data[stock.ticker].quote.latestPrice,
-      open: data[stock.ticker].quote.open,
-      value: data[stock.ticker].quote.latestPrice * stock.quantity
+      ticker,
+      quantity,
+      price: latestPrice,
+      open,
+      value: latestPrice * quantity
     }
   })
 }

@@ -41,6 +41,20 @@ User.prototype.correctPassword = function (password) {
   return User.encryptPassword(password, this.salt()) === this.password()
 }
 
+User.prototype.stocksOwned = async function () {
+  const stocks = await this.getStocks()
+  let shares = {}
+  stocks.forEach(stock => {
+    let { ticker, quantity } = stock
+    if (shares[ticker]) {
+      shares[ticker] += quantity
+    } else {
+      shares[ticker] = quantity
+    }
+  })
+  return shares
+}
+
 //class methods
 User.generateSalt = function () {
   return crypto.randomBytes(16).toString('base64')

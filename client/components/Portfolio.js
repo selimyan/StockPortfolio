@@ -48,12 +48,16 @@ export default class Portfolio extends Component {
   async buyShares(purchaseInfo) {
     try {
       this.setState({ message: '' })
+      // create a transaction instance and check for errors
       const { data } = await axios.post('/api/transactions', purchaseInfo)
       let message
       if (data === 'Unknown symbol') message = data
       else if (data.error) message = data.error
       if (message) this.setState({ message })
       else {
+        // add the shares to user's stocks
+        await axios.post('/api/stocks', purchaseInfo)
+        // update portfolio and view
         await this.fetchPortfolio()
         this.setState({ message: 'Purchased!', user: data.user })
         return 'Success'
