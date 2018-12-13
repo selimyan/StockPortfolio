@@ -15,6 +15,9 @@ const Stock = db.define('stock', {
       min: 1
     }
   }
-})
+}, {
+    timestamps: false
+  }
+)
 
 module.exports = Stock

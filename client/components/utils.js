@@ -3,7 +3,7 @@ export const stringifyTickers = (portfolio) => {
   for (let i = 0; i < portfolio.length; i++) {
     tickers.push(portfolio[i].ticker)
   }
-  return tickers.join(',').toLowerCase()
+  return tickers.join(',')
 }
 
 export const getCurrentTotalValue = (portfolio) => {
@@ -16,41 +16,17 @@ export const getCurrentTotalValue = (portfolio) => {
 }
 
 export const createPortfolio = (stocks, data) => {
-  let portfolio = []
-  for (let i = 0; i < stocks.length; i++) {
-    let currentStock = stocks[i]
-    let item = {
-      ticker: currentStock.ticker,
-      quantity: currentStock.quantity,
-      price: data[currentStock.ticker].quote.latestPrice,
-      open: data[currentStock.ticker].quote.open,
-      value: data[currentStock.ticker].quote.latestPrice * currentStock.quantity
-    }
-    portfolio.push(item)
-  }
-  return portfolio
-}
-
-export const getStocks = (transactions) => {
-  const stocks = {}
-  transactions.forEach((transaction) => {
-    let ticker = transaction.ticker.toUpperCase()
-    if (stocks[ticker]) {
-      stocks[ticker] += transaction.quantity
-    } else {
-      stocks[ticker] = transaction.quantity
+  return stocks.map(stock => {
+    const { ticker, quantity } = stock
+    const { latestPrice, open } = data[ticker].quote
+    return {
+      ticker,
+      quantity,
+      price: latestPrice,
+      open,
+      value: latestPrice * quantity
     }
   })
-
-  let portfolio = []
-  for (const stock in stocks) {
-    portfolio.push({
-      ticker: stock,
-      quantity: stocks[stock]
-    })
-  }
-
-  return portfolio
 }
 
 export const getDate = (date) => {

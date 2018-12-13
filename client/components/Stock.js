@@ -10,7 +10,7 @@ const Stock = ({ stock }) => {
     <tr className={color}>
       <td>{ticker}</td>
       <td>{quantity}</td>
-      <td>${price}</td>
+      <td>${(price).toFixed(2)}</td>
       <td>${(value).toFixed(2)}</td>
     </tr>
   )
