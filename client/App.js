@@ -66,7 +66,7 @@ export default class App extends Component {
   render() {
     const { user, error } = this.state
     return (
-      <div>
+      <div className='app-container'>
         {
           user.id ?
             <div>
