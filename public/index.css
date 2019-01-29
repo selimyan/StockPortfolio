@@ -6,8 +6,19 @@ body {
   margin: 0;
 }
 
+input {
+  background-color: rgba(0,0,0,0.8);
+}
+
 #app {
   padding: 0;
+}
+
+.app-container {
+  height: 100vh;
+  width: 100vw;
+  background: #f6f1d3;
+  background: linear-gradient(to right, #f6f1d3 40%, #648880);
 }
 
 .table {
@@ -21,4 +32,8 @@ body {
 
 .mh-100 {
   height: 100vh;
+}
+
+.text-success {
+  color: #e2725b;
 }
